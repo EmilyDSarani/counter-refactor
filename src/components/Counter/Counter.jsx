@@ -19,7 +19,7 @@ function countReducer(count, action){
       return count - 1
     }
     case 'reset' : {
-      return count - count
+      return 0
     }
   }
   // you have to return count at the end of this.... do we need to put a default somewhere?
