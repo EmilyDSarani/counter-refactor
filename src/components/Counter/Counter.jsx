@@ -47,19 +47,19 @@ export default function Counter() {
   const handleIncreCount = () =>{
    dispatch({
      type: 'increment',
-     count
+     
    })
   }
   const handleDecreCount = () =>{
     dispatch({
       type: 'decrement',
-      count
+      
     })
    }
    const handleResetCount = () =>{
     dispatch({
       type: 'reset',
-      count
+      
     })
    }
    
