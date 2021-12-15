@@ -5,7 +5,11 @@ const pinkRGB = `rgb(236, 72, 153)`
 
 // reduce is handling the counter
 // Reducer Function goes here
-
+// //- you use a switch statement to update a state inside a reducer.
+// - this is usually the only time it comes up
+// - after you call SWITCH, it will take in some value, and then it determine which CASE it will go to
+// - default is like the else, it is the last statement if there is nothing else. 
+// - ALL ACTIONS HAVE TO HAVE A TYPE
 function countReducer(count, action){
   switch(action.type){
     case 'increment': {
@@ -18,6 +22,7 @@ function countReducer(count, action){
       return count - count
     }
   }
+  // you have to return count at the end of this.... do we need to put a default somewhere?
   return count
 }
 
@@ -25,25 +30,12 @@ function countReducer(count, action){
 export default function Counter() {
   // const [count, setCount] = useState(0)
   const [currentColor, setCurrentColor] = useState(pinkRGB)
-
+// count is our state, dispatch is our setSet, the countReducer is how we update state, and 0 is initial 
   const [count, dispatch] = useReducer(countReducer, 0)
 
-  // set the state here
 
-
-  
-  // useEffect(() => {
-  //   if (count > 0) {
-  //     setCurrentColor(`rgb(52, 211, 153)`)
-  //   }
-
-  //   if (count < 0) {
-  //     setCurrentColor(`rgb(239, 68, 68)`)
-  //   }
-  // }, [count])
-
-  
-
+// we dont need to put count in here because we are already calling it in state above. 
+// then below you will call it for each of the parts
   const handleIncreCount = () =>{
    dispatch({
      type: 'increment',
@@ -63,20 +55,6 @@ export default function Counter() {
     })
    }
    
-
-// replace this with handle items?
-
-  // const increment = () => {
-  //   setCount((prevState) => prevState + 1)
-  // }
-
-  // const decrement = () => {
-  //   setCount((prevState) => prevState - 1)
-  // }
-
-  // const reset = () => {
-  //   setCount(0)
-  // }
 
   return (
     <main className="bg-black bg-opacity-90 min-h-screen flex flex-col items-center justify-center text-4xl text-pink-500">
