@@ -62,7 +62,7 @@ export default function Counter() {
   return (
     <main className="bg-black bg-opacity-90 min-h-screen flex flex-col items-center justify-center text-4xl text-pink-500">
       <h1 className="mb-5" style={{ color: currentColor }}>
-        {count}
+        {count.count}
       </h1>
       <div className="flex w-1/2 justify-around">
         <button
