@@ -34,6 +34,9 @@ export default function Counter() {
   const [count, dispatch] = useReducer(countReducer, 0)
 
 
+// oops, deleted useEffect, it probably needed to go here?
+
+
 // we dont need to put count in here because we are already calling it in state above. 
 // then below you will call it for each of the parts
   const handleIncreCount = () =>{
