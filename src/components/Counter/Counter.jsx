@@ -1,37 +1,77 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useReducer } from 'react'
 
 const pinkRGB = `rgb(236, 72, 153)`
 
+
+// reduce is handling the counter
+// Reducer Function goes here
+// //- you use a switch statement to update a state inside a reducer.
+// - this is usually the only time it comes up
+// - after you call SWITCH, it will take in some value, and then it determine which CASE it will go to
+// - default is like the else, it is the last statement if there is nothing else. 
+// - ALL ACTIONS HAVE TO HAVE A TYPE
+function countReducer(count, action){
+  switch(action.type){
+    case 'increment': {
+      return count + 1
+    }
+    case 'decrement' : {
+      return count - 1
+    }
+    case 'reset' : {
+      return 0
+    }
+  }
+  // you have to return count at the end of this.... do we need to put a default somewhere?
+  return count
+}
+
+
 export default function Counter() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
   const [currentColor, setCurrentColor] = useState(pinkRGB)
+// count is our state, dispatch is our setSet, the countReducer is how we update state, and 0 is initial 
+  const [count, dispatch] = useReducer(countReducer, 0)
+  
 
-  useEffect(() => {
-    if (count === 0) {
-      setCurrentColor(pinkRGB)
-    }
-
-    if (count > 0) {
-      setCurrentColor(`rgb(52, 211, 153)`)
-    }
-
-    if (count < 0) {
-      setCurrentColor(`rgb(239, 68, 68)`)
-    }
-  }, [count])
-
-  const increment = () => {
-    setCount((prevState) => prevState + 1)
+// oops, deleted useEffect, it probably needed to go here?
+useEffect(() => {
+  if (count.count === 0) {
+    setCurrentColor(pinkRGB)
   }
 
-  const decrement = () => {
-    setCount((prevState) => prevState - 1)
+  if (count.count > 0) {
+    setCurrentColor(`rgb(52, 211, 153)`)
   }
 
-  const reset = () => {
-    setCount(0)
+  if (count.count < 0) {
+    setCurrentColor(`rgb(239, 68, 68)`)
   }
+}, [count])
 
+
+// we dont need to put count in here because we are already calling it in state above. 
+// then below you will call it for each of the parts
+  const handleIncreCount = () =>{
+   dispatch({
+     type: 'increment',
+     
+   })
+  }
+  const handleDecreCount = () =>{
+    dispatch({
+      type: 'decrement',
+      
+    })
+   }
+   const handleResetCount = () =>{
+    dispatch({
+      type: 'reset',
+      
+    })
+   }
+   
+// the whole piece of state is now count, so now it is going to be count.count
   return (
     <main className="bg-black bg-opacity-90 min-h-screen flex flex-col items-center justify-center text-4xl text-pink-500">
       <h1 className="mb-5" style={{ color: currentColor }}>
@@ -41,7 +81,7 @@ export default function Counter() {
         <button
           className="text-green-400 border-2 border-green-400 p-3"
           type="button"
-          onClick={increment}
+          onClick={handleIncreCount}
           aria-label="increment"
         >
           Increment
@@ -49,7 +89,7 @@ export default function Counter() {
         <button
           className="text-red-500 border-2 border-red-500 p-2"
           type="button"
-          onClick={decrement}
+          onClick={handleDecreCount}
           aria-label="decrement"
         >
           Decrement
@@ -58,7 +98,7 @@ export default function Counter() {
           className="text-pink-500 border-2 border-pink-500 p-2"
           type="button"
           aria-label="reset"
-          onClick={reset}
+          onClick={handleResetCount}
         >
           Reset
         </button>
